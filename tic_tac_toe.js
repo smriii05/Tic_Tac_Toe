@@ -31,6 +31,7 @@ function cellClicked(){
     }
 
     updateCell(this, cellIndex);
+    playerColor(this,cellIndex);
     checkWinner();
 }
 function updateCell(cell, index){
@@ -77,4 +78,17 @@ function restartGame(){
     statusText.textContent = `${currentPlayer}'s turn`;
     cells.forEach(cell => cell.textContent = "");
     running = true;
+}
+
+function playerColor(cell, index){
+    if(currentPlayer=="X"){
+        for(cellIndex in cells){
+            cells.forEach(cellIndex=>cell.style.color = "#F6CACA");
+        }
+    }
+    else if(currentPlayer=="O"){
+        for(cellIndex in cells){
+            cells.forEach(cellIndex=>cell.style.color = "#87A0B2");
+        }
+    }
 }
