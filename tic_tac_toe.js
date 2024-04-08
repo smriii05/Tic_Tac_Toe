@@ -1,11 +1,13 @@
 const cells = document.querySelectorAll(".cell");
 const statusText = document.querySelector("#statusText");
 const restartBtn = document.querySelector("#restartBtn");
-const clickSound = document.getElementById("ting");
+const popSound = document.getElementById("pop");
+const drawSound = document.getElementById("draw");
+const winSound = document.getElementById("win");
+const clickSound = document.getElementById("click");
 
-function playSound() {
-    ting.play();
-}
+
+
 
 const winConditions = [
     [0, 1, 2],
@@ -19,13 +21,13 @@ const winConditions = [
 ];
 const winline=[
     [1, -110, 0],
-    [0, -30, 0],
-    [0, 45, 0],
+    [0, -28, 0],
+    [0, 52, 0],
     [-80, -30, 90],
-    [-1, -30, 90],
-    [80, -30, 90],
-    [7, -30, 45],
-    [-2, -30, 135]
+    [0, -28, 90],
+    [82, -30, 90],
+    [0, -30, 45],
+    [0, -30, 135]
 ];
 let options = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
@@ -49,7 +51,7 @@ function cellClicked(){
     updateCell(this, cellIndex);
     playerColor(this,cellIndex);
     checkWinner();
-    playSound()
+    playClickSound();
 }
 function updateCell(cell, index){
     options[index] = currentPlayer;
@@ -57,7 +59,7 @@ function updateCell(cell, index){
 }
 function changePlayer(){
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
-    statusText.textContent = `Player ${currentPlayer}'s turn`;
+    statusText.textContent = `Player ${currentPlayer}'s turn 🤔`;
 }
 function checkWinner(){
     let roundWon = false;
@@ -74,18 +76,19 @@ function checkWinner(){
         if(cellA == cellB && cellB == cellC){
             drawline();
             roundWon = true;
-            
-break;
+            break;
         }
     }
 
     if(roundWon){
-        statusText.textContent = `Player ${currentPlayer} wins!`;
+        statusText.textContent = `Player ${currentPlayer} wins! 🎉`;
         document.querySelector(".line").style.width="320px";
+        playWinSound();
         running = false;
     }
     else if(!options.includes("")){
-        statusText.textContent = `Draw!`;
+        statusText.textContent = `Draw! 😒`;
+        playDrawSound();
         running = false;
     }
     else{
@@ -131,9 +134,10 @@ function restartGame(){
     currentPlayer = "X";
     options = ["", "", "", "", "", "", "", "", ""];
     document.querySelector(".line").style.width="0px";
-    statusText.textContent = `Player ${currentPlayer}'s turn`;
+    statusText.textContent = `Player ${currentPlayer}'s turn 🤔`;
     cells.forEach(cell => cell.textContent = "");
     running = true;
+    playSound();
 }
 
 function playerColor(cell, index){
@@ -147,4 +151,20 @@ function playerColor(cell, index){
             cells.forEach(cellIndex=>cell.style.color = "#87A0B2");
         }
     }
+}
+
+function playSound() {
+    popSound.play();
+}
+
+function playDrawSound() {
+    drawSound.play();
+}
+
+function playWinSound() {
+    winSound.play();
+}
+
+function playClickSound() {
+    clickSound.play();
 }
