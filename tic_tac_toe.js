@@ -1,6 +1,12 @@
 const cells = document.querySelectorAll(".cell");
 const statusText = document.querySelector("#statusText");
 const restartBtn = document.querySelector("#restartBtn");
+const clickSound = document.getElementById("ting");
+
+function playSound() {
+    ting.play();
+}
+
 const winConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -11,6 +17,16 @@ const winConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+const winline=[
+    [1, -110, 0],
+    [0, -30, 0],
+    [0, 45, 0],
+    [-80, -30, 90],
+    [-1, -30, 90],
+    [80, -30, 90],
+    [7, -30, 45],
+    [-2, -30, 135]
+];
 let options = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
 let running = false;
@@ -20,7 +36,7 @@ initializeGame();
 function initializeGame(){
     cells.forEach(cell => cell.addEventListener("click", cellClicked));
     restartBtn.addEventListener("click", restartGame);
-    statusText.textContent = `${currentPlayer}'s turn`;
+    statusText.textContent = `Player ${currentPlayer}'s turn`;
     running = true;
 }
 function cellClicked(){
@@ -33,6 +49,7 @@ function cellClicked(){
     updateCell(this, cellIndex);
     playerColor(this,cellIndex);
     checkWinner();
+    playSound()
 }
 function updateCell(cell, index){
     options[index] = currentPlayer;
@@ -40,7 +57,7 @@ function updateCell(cell, index){
 }
 function changePlayer(){
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
-    statusText.textContent = `${currentPlayer}'s turn`;
+    statusText.textContent = `Player ${currentPlayer}'s turn`;
 }
 function checkWinner(){
     let roundWon = false;
@@ -55,13 +72,16 @@ function checkWinner(){
             continue;
         }
         if(cellA == cellB && cellB == cellC){
+            drawline();
             roundWon = true;
-            break;
+            
+break;
         }
     }
 
     if(roundWon){
-        statusText.textContent = `${currentPlayer} wins!`;
+        statusText.textContent = `Player ${currentPlayer} wins!`;
+        document.querySelector(".line").style.width="320px";
         running = false;
     }
     else if(!options.includes("")){
@@ -72,10 +92,46 @@ function checkWinner(){
         changePlayer();
     }
 }
+
+function drawline(){
+
+    const lineDiv = document.querySelector(".line");
+
+    // Find the index of the winning condition
+    let winIndex = -1;
+    for (let i = 0; i < winConditions.length; i++) {
+        const condition = winConditions[i];
+        const cellA = options[condition[0]];
+        const cellB = options[condition[1]];
+        const cellC = options[condition[2]];
+
+        if (cellA != "" && cellA === cellB && cellB === cellC) {
+            winIndex = i;
+            break;
+        }
+    }
+
+    // If a winning condition is found, draw the line
+    if (winIndex !== -1) {
+        const transformation = winline[winIndex];
+        applyTransformation(transformation);
+    }
+}
+
+// Function to apply transformation to the div
+function applyTransformation(transformation) {
+    const lineDiv = document.querySelector(".line");
+    lineDiv.style.transform = `translate(${transformation[0]}px, ${transformation[1]}px) rotate(${transformation[2]}deg)`;
+
+
+}
+
+
 function restartGame(){
     currentPlayer = "X";
     options = ["", "", "", "", "", "", "", "", ""];
-    statusText.textContent = `${currentPlayer}'s turn`;
+    document.querySelector(".line").style.width="0px";
+    statusText.textContent = `Player ${currentPlayer}'s turn`;
     cells.forEach(cell => cell.textContent = "");
     running = true;
 }

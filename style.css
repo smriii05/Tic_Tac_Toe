@@ -15,22 +15,42 @@
 .cell:hover{
     background-color: rgb(124,108,119);
 }
-#gameContainer{
-    font-family: "Permanent Marker", cursive;
+.gameContainer{
+    display:flex;
+    flex-direction:column;
     text-align: center;
+    gap:30px;
     justify-content: center;
     align-items:center;
+    position: relative;
+    
+
 }
 #cellContainer{
     display: grid;
     grid-template-columns: repeat(3, auto);
     border-radius:8px;
-    width: 225px;
+    width: 236px;
+    height:228px;
     margin: auto;
+    border:3 px solid #FCDFA6;
+}
+    
+.bl-0{
+    border-left:0;
+}
+.br-0{
+    border-right:0;
+}
+.bt-0{
+    border-top:0;
+}
+.bb-0{
+    border-bottom:0;
 }
 #restartBtn{
     height: 50px;
-    width: 120px;
+    width: 110px;
     border: 3px solid #fff;
     border-radius: 20px;
     font-size: 24px;
@@ -38,4 +58,13 @@
 #restartBtn:hover{
     transform: translateY(-2px);
     background-color:rgb(124,108,119);
+}
+
+.line{
+    position:absolute;
+    height:5px ;
+    width:0px;
+    background-color:#FCDFA6;
+    border-radius:10px;
+    transition: width 1s ease-in-out;
 }
