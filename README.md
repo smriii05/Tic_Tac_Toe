@@ -1,7 +1,7 @@
 # Tic Tac Toe
 
 This is a simple Tic Tac Toe game created using HTML,CSS and Vanilla JavaScript.
-[![Project Name Screen Shot][project-screenshot]](https://github.com/shakyasmriti05/Tic_Tac_Toe)
+- [![Project Name Screen Shot][project-screenshot]](https://github.com/shakyasmriti05/Tic_Tac_Toe)
 
 
 ### Built With
