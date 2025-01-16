@@ -1,7 +1,8 @@
 # Tic Tac Toe
 
 This is a simple Tic Tac Toe game created using HTML,CSS and Vanilla JavaScript.
-- [![Project Name Screen Shot][project-screenshot]](https://github.com/shakyasmriti05/Tic_Tac_Toe)
+![Tic_Tac_Toe](https://github.com/user-attachments/assets/f6b6cbf3-aded-4869-bbae-c2f916733f0e)
+
 
 
 ### Built With
@@ -14,7 +15,6 @@ This is a simple Tic Tac Toe game created using HTML,CSS and Vanilla JavaScript.
 https://tic-tac-toe-five-sigma-95.vercel.app/
 
 
-[project-screenshot]: images/Tic_Tac_Toe.png
 [Html]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
 [Html-url]: https://html.spec.whatwg.org/
 [CSS]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
